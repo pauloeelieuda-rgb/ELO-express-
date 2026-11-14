@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#071c16">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="ELO">
+  <meta name="description" content="ELO — conectando você ao seu cliente. Precificação e orçamentos em um só aplicativo.">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./icon-192.png">
+  <link rel="apple-touch-icon" href="./icon-192.png">
+  <link rel="stylesheet" href="./style.css">
+  <title>ELO | Conectando você ao seu cliente</title>
+</head>
+<body>
+  <div id="splash" class="splash">
+    <div class="splash-glow"></div>
+    <div class="splash-content">
+      <img class="elo-logo" src="./icon-512.png" alt="Logo oficial ELO"
+           onerror="this.style.display='none';document.getElementById('logoFallback').style.display='grid'">
+      <div id="logoFallback" class="logo-fallback" style="display:none">ELO</div>
+      <p class="tagline">CONECTANDO VOCÊ AO SEU CLIENTE</p>
+      <div class="loader"><span></span></div>
+    </div>
+  </div>
+
+  <main id="app" class="app-shell hidden">
+    <header class="topbar">
+      <button class="brand-mini" data-action="home" aria-label="Voltar à central">
+        <span class="brand-dot">E</span><span>ELO</span>
+      </button>
+      <button class="icon-button" data-action="settings" aria-label="Minha marca">⚙</button>
+    </header>
+
+    <section id="home" class="screen active">
+      <div class="hero">
+        <p class="eyebrow">SUA CENTRAL DE SOLUÇÕES</p>
+        <h1>Seu trabalho.<br><em>Mais profissional.</em></h1>
+        <p class="subcopy">Escolha por onde quer começar.</p>
+      </div>
+      <div class="module-grid">
+        <button class="module-card pricing-card" data-module="pricing">
+          <span class="card-orb"></span>
+          <span class="module-icon">▦</span>
+          <span class="module-kicker">MÓDULO 01</span>
+          <strong>PrecificaFácil</strong>
+          <span class="module-desc">Descubra quanto cobrar, com clareza sobre custos, margem e lucro.</span>
+          <span class="card-cta">ABRIR FERRAMENTA <b>↗</b></span>
+        </button>
+        <button class="module-card budget-card" data-module="budget">
+          <span class="card-orb"></span>
+          <span class="module-icon">▤</span>
+          <span class="module-kicker">MÓDULO 02</span>
+          <strong>OrçamentoZap</strong>
+          <span class="module-desc">Transforme seu serviço em uma proposta profissional para o cliente.</span>
+          <span class="card-cta">ABRIR FERRAMENTA <b>↗</b></span>
+        </button>
+      </div>
+      <div class="home-foot"><span class="pulse"></span> DUAS FERRAMENTAS. UMA SÓ ELO.</div>
+    </section>
+
+    <section id="pricing" class="screen module-screen pricing-theme">
+      <div class="module-head">
+        <button class="back-button" data-action="home">← Central ELO</button>
+        <span class="module-label">PRECIFICAÇÃO INTELIGENTE</span>
+        <h1>Precifica<span>Fácil</span></h1>
+        <p>Saiba quanto seu serviço realmente custa e quanto cobrar.</p>
+      </div>
+      <div class="panel">
+        <h2>Composição dos custos</h2>
+        <label>Materiais e insumos (R$)<input id="materials" type="number" min="0" step="0.01" placeholder="0,00"></label>
+        <label>Mão de obra (R$)<input id="labor" type="number" min="0" step="0.01" placeholder="0,00"></label>
+        <label>Deslocamento (R$)<input id="travel" type="number" min="0" step="0.01" placeholder="0,00"></label>
+        <label>Outras despesas e taxas (R$)<input id="extras" type="number" min="0" step="0.01" placeholder="0,00"></label>
+        <label>Margem desejada sobre o preço final (%)<input id="margin" type="number" min="0" max="99" step="0.1" value="30"></label>
+        <button class="primary-button" id="calculate">CALCULAR PREÇO SUGERIDO</button>
+      </div>
+      <div id="pricingResult" class="result-panel" aria-live="polite">
+        <span class="result-caption">SEU RESULTADO APARECERÁ AQUI</span>
+        <p>Preencha os custos para calcular seu preço.</p>
+      </div>
+      <button class="secondary-button" id="sendToBudget">CRIAR ORÇAMENTO COM ESTE CÁLCULO →</button>
+    </section>
+
+    <section id="budget" class="screen module-screen budget-theme">
+      <div class="module-head">
+        <button class="back-button" data-action="home">← Central ELO</button>
+        <span class="module-label">PROPOSTAS PROFISSIONAIS</span>
+        <h1>Orçamento<span>Zap</span></h1>
+        <p>Apresente seu serviço com clareza e profissionalismo.</p>
+      </div>
+      <div class="panel">
+        <h2>Dados do orçamento</h2>
+        <label>Nome do profissional ou empresa<input id="provider" type="text" placeholder="Seu nome / sua empresa"></label>
+        <label>Nome do cliente<input id="client" type="text" placeholder="Nome do cliente"></label>
+        <label>Serviço ou proposta<textarea id="service" rows="3" placeholder="Descreva o serviço que será realizado"></textarea></label>
+        <label>Valor total (R$)<input id="quoteValue" type="number" min="0" step="0.01" placeholder="0,00"></label>
+        <label>Prazo de execução<input id="deadline" type="text" placeholder="Ex.: 5 dias úteis"></label>
+        <label>Condições de pagamento<textarea id="payment" rows="2" placeholder="Ex.: 50% na aprovação e 50% na conclusão"></textarea></label>
+        <label>Validade da proposta<input id="validity" type="text" placeholder="Ex.: 10 dias"></label>
+        <label>Observações<textarea id="notes" rows="2" placeholder="Informações adicionais (opcional)"></textarea></label>
+        <button class="primary-button" id="previewQuote">VISUALIZAR PROPOSTA</button>
+      </div>
+      <div id="quotePreview" class="quote-preview hidden"></div>
+      <div class="share-actions">
+        <button class="primary-button" id="printQuote">GERAR PDF / IMPRIMIR</button>
+        <button class="secondary-button" id="shareQuote">COMPARTILHAR</button>
+      </div>
+    </section>
+
+    <section id="settings" class="screen module-screen settings-theme">
+      <div class="module-head">
+        <button class="back-button" data-action="home">← Central ELO</button>
+        <span class="module-label">IDENTIDADE PROFISSIONAL</span>
+        <h1>Minha <span>Marca</span></h1>
+        <p>Cadastre seus dados uma vez e reutilize nos orçamentos.</p>
+      </div>
+      <div class="panel">
+        <label>Nome profissional / empresa<input id="brandName" type="text" placeholder="Como deseja aparecer no orçamento"></label>
+        <label>Telefone / WhatsApp<input id="brandPhone" type="tel" placeholder="(00) 00000-0000"></label>
+        <label>E-mail<input id="brandEmail" type="email" placeholder="voce@exemplo.com"></label>
+        <label>Logo profissional<input id="brandLogo" type="file" accept="image/*"></label>
+        <div id="brandLogoPreview" class="brand-preview">Prévia da sua logo profissional</div>
+        <button class="primary-button" id="saveBrand">SALVAR MINHA MARCA</button>
+      </div>
+    </section>
+    <footer class="app-footer">ELO <span>•</span> Conectando você ao seu cliente</footer>
+  </main>
+  <script src="./app.js"></script>
+</body>
+</html>
